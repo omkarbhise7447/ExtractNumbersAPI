@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -18,7 +18,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
         }
         const data = JSON.parse(req.file.buffer.toString());
         const processData = data.map((item) => ({
-            id = item.id,
+            id : item.id,
             nameNumbers: extractNumbers(item.name),
             age: extractNumbers(item.age),
         }));
